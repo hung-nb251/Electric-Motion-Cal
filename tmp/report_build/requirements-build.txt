@@ -1,0 +1,8 @@
+# Only needed to regenerate reports and PDF preview images.
+numpy
+matplotlib
+python-docx
+pypdf
+pdf2image
+Pillow
+# pdf2image also needs Poppler installed on PATH.

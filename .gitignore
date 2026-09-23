@@ -17,3 +17,11 @@ desktop.ini
 
 # Temporary render outputs
 tmp/report_build/render/
+tmp/report_build/render_x2/
+tmp/report_build/before_x2/
+tmp/report_build/mplconfig/
+tmp/report_build/*.png
+!tmp/report_build/states.png
+tmp/report_build/*.log
+tmp/report_build/*.ndjson
+outputs/**/*.inspect.ndjson

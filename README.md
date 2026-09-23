@@ -11,7 +11,7 @@ Dự án học phần **EE4332 – học kỳ 20261**, tính toán phần cứng
 | [Báo cáo PDF](outputs/bao_cao_xe_con/Bao_cao_xe_con_x2_theo_mau.pdf) | Bản để đọc và in, 12 trang. |
 | [Lưu đồ SVG](outputs/bao_cao_xe_con/Luu_do_trang_thai.svg) | Hình vector các trạng thái S0–S8. |
 
-Các file tên `Bao_cao_phan_cung_va_logic_xe_con` và `Tinh_toan_xe_con_12222kg.xlsx` là **bản trước**, dùng giả thiết cản lăn khác và motor 2,2 kW. Làm báo cáo theo mẫu với x = 2 thì dùng các file **x2_theo_mau** ở trên.
+Bộ **x2_theo_mau** ở trên là bản hiện hành, thay thế bản tính 2,2 kW trước đây. Các bản xuất cũ và bản sao tạm đã được dọn khỏi thư mục làm việc.
 
 ## Đầu vào và giả thiết
 
@@ -93,4 +93,11 @@ Không tự chạy lại khi có điện hoặc khi nhả E-stop. Giới hạn v
 - [SOW](SOW_HungNB.docx).
 - `tmp/report_build/rebuild_x2.mjs`: dựng Excel có công thức.
 - `tmp/report_build/build_report_x2.py`: dựng báo cáo và biểu đồ.
-- `tmp/report_build/`: mã hỗ trợ, ảnh kiểm tra, kết quả trung gian và bản sao trước chỉnh sửa; không thuộc hồ sơ nộp chính.
+- `tmp/report_build/build_report.py`: chứa các hàm định dạng và nội dung logic được bản x2 sử dụng lại; giữ làm thành phần phụ thuộc, không chạy để xuất báo cáo cũ.
+- `tmp/report_build/`: giữ mã dựng, dữ liệu nguồn, kết quả x2 và ảnh lưu đồ cần thiết; không thuộc hồ sơ nộp chính.
+
+## Giữ thư mục gọn
+
+Ảnh render, log, bản sao cũ và thư viện Python cài tạm đã được dọn. `.gitignore` loại trừ các file trung gian khi tạo lại. Tài liệu nguồn, bộ báo cáo hiện hành và lịch sử Git được giữ nguyên.
+
+Đọc hoặc sửa trực tiếp Word/Excel không cần cài thư viện. Nếu chạy lại mã dựng, chuẩn bị Python với các gói trong `tmp/report_build/requirements-build.txt`; mã JavaScript cần `@oai/artifact-tool` từ môi trường dựng tài liệu. Liên kết `node_modules` tạm đã được gỡ, cần cấu hình lại khi dựng Excel. Xuất PDF bằng script PowerShell yêu cầu Microsoft Word.
