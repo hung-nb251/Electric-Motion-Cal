@@ -1,0 +1,193 @@
+﻿SYSTEM ARCHITECTURE – CRANE TROLLEY DRIVE SYSTEM
+________________
+
+
+LEVEL 1 – System Overview (Conceptual Architecture)
+(Developed from System Requirements / VOC)
+
+
+Key Level 1 Design Objectives (from SOR):
+Objective
+	Quantitative Target
+	Rated load
+	11 111 kg
+	Lifting/trolley speed
+	0.11 m/s
+	Max acceleration
+	0.5 m/s²
+	Max jerk
+	2 m/s³
+	System efficiency
+	≥ 0.85
+	Protection
+	OVP, OCP, OTP, E-stop
+	Environment
+	0–40 °C, ≤ 85 % RH
+	
+
+Functional Blocks (Level 1 subsystems)
+Subsystem
+	Main Function
+	Input / Output
+	Relation to Requirements
+	Power Source & Protection
+	Provides stable 3-phase 380 V AC power and protects from overload, short circuit, or fault.
+	Input: plant power
+Output: controlled AC to drive
+	Ensures safe & reliable power supply
+	Drive & Motor System
+	Converts electrical energy into mechanical torque to move trolley.
+	Input: variable AC from VFD
+Output: mechanical rotation
+	Satisfies requirements on speed, acceleration, torque
+	Mechanical Transmission
+	Transmits torque from motor to wheels; supports the trolley frame and hoist.
+	Input: torque
+Output: linear motion
+	Ensures rated load and smooth motion
+	Control & Command System
+	Generates control signals for motion profiles (accel/decel), monitors feedback sensors, and ensures closed-loop control.
+	Input: operator commands, feedback signals
+Output: control signals to VFD
+	Maintains velocity/position accuracy, jerk limit
+	Sensor & Feedback System
+	Measures motor speed, current, position, and limit conditions.
+	Input: physical motion & current
+Output: feedback signals
+	Enables closed-loop control and safety monitoring
+	Safety & Interlock System
+	Supervises limit switches, overload, and emergency stops.
+	Input: fault signalsOutput: stop/brake actions
+	Ensures safety per TCVN 4244:2005
+	Operator Interface (HMI/PLC)
+	Interface for start/stop, mode selection, fault display, and manual control.
+	Input: user actionsOutput: commands to controller
+	Satisfies usability and human safety
+	________________
+
+
+System Flow (Functional Relationship)
+[Power Source] 
+     ↓
+[Drive (VFD + Motor)] 
+     ↓
+[Mechanical Transmission → Trolley Motion]
+     ↑
+[Sensor & Feedback System]
+     ↑
+[Control & Command System]
+     ↑
+[Operator Interface & Safety Interlocks]
+
+
+  
+
+LEVEL 2 – Subsystem Architecture (Detailed Components)
+1. Drive & Motor Subsystem
+Element
+	Specification
+	Description
+	Motor
+	3-phase asynchronous motor, 5.5 kW, 380 V, 50 Hz
+	Selected to meet 3.838 kW mechanical demand (peak) with margin
+	Control Method
+	Field Oriented Control (FOC) with PI speed/current loops
+	Ensures smooth acceleration and torque control
+	Gearbox
+	Ratio ≈ 75:1
+	Matches motor speed (716,2 rpm) to drum speed (≈ 9,55 rpm)
+	
+
+	
+
+	
+
+	  
+
+2. Power Supply & VFD Subsystem
+Element
+	Specification
+	Description
+	Input Source
+	3-phase 380 V AC
+	Plant power network
+	Circuit Breaker (MCCB)
+	16 A, 3P
+	Main protection
+	Variable Frequency Drive (VFD)
+	ABB ACS355-03E-12A5-4
+	Rated 5.5 kW, 12.5 A, 0–500 Hz, IP20, supports FOC & brakingnhjm,ikxs
+	Brake Resistor (if used)
+	200 Ω, 1 kW
+	Energy dissipation during decel
+	  
+  
+
+3. Sensor & Feedback Subsystem
+Element
+	Specification
+	Function
+	Speed Encoder
+	Autonics E40HB8-2000-6-L-5 (2000 ppr)
+	Provides speed/position feedback
+	Current Sensor
+	SCT013-015, 15 A RMS, 50 Hz–1 kHz
+	Measures stator current for torque feedback
+	Limit Switches
+	Mechanical SPDT, IP65
+	Detect end positions of trolley travel
+	Temperature Sensor
+	NTC/PT100
+	Monitors motor temperature
+	  
+  
+
+4. Control & Processing Subsystem
+Block
+	Function
+	Controller/PLC
+	Generates speed reference, supervises interlocks
+	FOC Controller (in VFD)
+	Inner current loop, outer speed loop, PWM modulation
+	PWM Inverter Stage
+	3-phase bridge driving stator coils
+	Feedback Processing
+	Filters encoder/current data, computes control errors
+	
+
+5. Mechanical Transmission Subsystem
+Element
+	Function
+	Notes
+	Gearbox
+	Reduce motor speed to achieve trolley linear velocity 0.11 m/s
+	Ratio ~75:1
+	Wheel assembly
+	Translates torque to motion along beam
+	Mounted on trolley frame
+	Frame & Rails
+	Support structure for motion
+	Ensures alignment and load stability
+	
+
+6. Safety & HMI Subsystem
+Element
+	Function
+	Emergency Stop Button
+	Immediate power cutoff
+	Overload Protection Relay
+	Disconnects drive when load > limit
+	HMI Panel
+	Displays status, allows mode control
+	Brake Control
+	Engages brake when stop or power off
+	
+
+Functional Interaction Summary (Level 2 Diagram – text form)
+[PLC/HMI]
+    ↓ command / mode
+[Controller – FOC PI control] ← Feedback (Encoder, Current, Limit)
+    ↓ PWM
+[VFD + Inverter]
+    ↓ 3-phase AC
+[Motor → Gearbox → Wheels → Trolley]

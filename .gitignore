@@ -1,0 +1,8 @@
+# Temporary build files and dependencies
+tmp/
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
+.DS_Store
