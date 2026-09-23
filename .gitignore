@@ -1,8 +1,19 @@
-# Temporary build files and dependencies
-tmp/
-__pycache__/
+# Dependencies
+node_modules/
+pydeps/
+
+# Build outputs
 *.pyc
+__pycache__/
 
 # OS files
-Thumbs.db
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary render outputs
+tmp/report_build/render/
